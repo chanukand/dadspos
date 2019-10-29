@@ -249,7 +249,7 @@ public class category extends JInternalFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
     private void newForm(){
-        System.out.println("tytytyt");
+        System.out.println("tytytytjkjk");
     }
     /**
      * @param args the command line arguments
