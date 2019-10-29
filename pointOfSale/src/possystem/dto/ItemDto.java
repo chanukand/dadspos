@@ -10,5 +10,5 @@ package possystem.dto;
  * @author Lochana
  */
 public class ItemDto {
-    
+    private String var;
 }
