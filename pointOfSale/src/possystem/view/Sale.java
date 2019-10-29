@@ -184,6 +184,7 @@ public class Sale extends JInternalFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Sale().setVisible(true);
+              
             }
         });
     }
