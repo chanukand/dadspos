@@ -218,7 +218,7 @@ public class Branch extends JInternalFrame {
         //        searc = null;
     }//GEN-LAST:event_jButton4ActionPerformed
     private void newForm(){
-        
+        System.out.println("abc");
     }
     /**
      * @param args the command line arguments
