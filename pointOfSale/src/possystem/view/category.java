@@ -31,7 +31,7 @@ public class category extends JInternalFrame {
         initComponents();
         showGrid();
     }
-    private void showGrid() {
+    public void showGrid() {
         try {
             String colu[] = new String[]{"ID", "Code", "Name", "Description", "remark"};
             DefaultTableModel model = new DefaultTableModel(colu, 1) {
@@ -238,11 +238,24 @@ public class category extends JInternalFrame {
     }//GEN-LAST:event_txtSearchKeyTyped
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-
+        try {
+            String search = txtSearch.getText();
+            ArrayList<CategoryDto> catArr = categoryModel.search(search);
+            dtf = (DefaultTableModel) tblCate.getModel();
+            dtf.setRowCount(0);
+            
+            for (CategoryDto object : catArr) {
+                Object[] rowData = {object.getId(), object.getCode(), object.getName(), object.getDesc(), object.getRemark()};
+                dtf.addRow(rowData);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(category.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-
+        
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
@@ -261,9 +274,18 @@ public class category extends JInternalFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        TableModel model = tblCate.getModel();
         int row = tblCate.getSelectedRow();
-        int id = Integer.valueOf(tblCate.getValueAt(row, row).toString());
+        int id = Integer.valueOf(tblCate.getValueAt(row, 0).toString());
+        try{
+            if(categoryModel.delete(id)){
+                JOptionPane.showMessageDialog(this, "Delete Successfully");
+                showGrid();
+            } else {
+                JOptionPane.showMessageDialog(this, "Delete not Successfully");
+            }
+        } catch(Exception e){
+            Logger.getLogger(category.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
     private void newForm(){
         System.out.println("");
@@ -320,7 +342,7 @@ public class category extends JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSearch;
-    private javax.swing.JTable tblCate;
+    public javax.swing.JTable tblCate;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -61,7 +61,7 @@ public class categoryModel {
         return crt1;
     }
     
-    public boolean delete(String id) throws Exception {
+    public static boolean delete(int id) throws Exception {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "UPDATE category SET isDeleted='1' WHERE id = ? ";
         PreparedStatement p = con.prepareStatement(sql);
@@ -70,14 +70,14 @@ public class categoryModel {
         return (rowsaffected > 0);
     }
     
-    public ArrayList search(String id) throws Exception {
+    public static ArrayList search(String id) throws Exception {
         Connection con = DBConnection.getInstance().getConnection();
-        String sql = "select * from category where isDeleted='0' and name LIKE '%"+id+"";
+        String sql = "select * from category where isDeleted='0' and name LIKE '%"+id+"%'";
         PreparedStatement pst = con.prepareStatement(sql);
         ResultSet rst = pst.executeQuery();
         ArrayList<CategoryDto> crt1 = new ArrayList<>();
         while (rst.next()) {            
-            CategoryDto crt = new CategoryDto(rst.getString("desc"), rst.getString("name"), rst.getString("code"), rst.getString("date"), rst.getString("remark"), rst.getInt("user"), rst.getInt("id"));
+            CategoryDto crt = new CategoryDto(rst.getString("description"), rst.getString("name"), rst.getString("code"), rst.getString("date"), rst.getString("remark"), rst.getInt("user"), rst.getInt("id"));
             crt1.add(crt);
         }
         return crt1;

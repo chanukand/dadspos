@@ -218,8 +218,17 @@ public class addCatogory extends javax.swing.JDialog {
                     1,
                     1
             );
-            if(categoryModel.add(crt)){
-                JOptionPane.showMessageDialog(this, "Saved Succeessfully");
+            if("Save".equals(btnSave.getText())){
+                if(categoryModel.add(crt)){
+                    JOptionPane.showMessageDialog(this, "Saved Successfully");
+                    category cat = new category();
+                    cat.showGrid();
+                } else{
+                    JOptionPane.showMessageDialog(this, "Saved not Successfully");
+                }
+            } else if("Update".equals(btnSave.getText())) {
+                category cat = new category();
+                System.out.println(cat.tblCate.getValueAt(cat.tblCate.getSelectedRow(), 0));
             }
         } catch (Exception ex) {
             Logger.getLogger(addCatogory.class.getName()).log(Level.SEVERE, null, ex);
