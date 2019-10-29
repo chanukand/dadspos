@@ -15,6 +15,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import possystem.view.Branch;
 import possystem.view.Itemm;
 import possystem.view.Purchase;
+import possystem.view.Sale;
 import possystem.view.User;
 import possystem.view.category;
 
@@ -125,7 +126,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2.setText("Transaction");
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/paymentreve.png"))); // NOI18N
-        jMenuItem3.setText("Cashier");
+        jMenuItem3.setText("Sale");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -193,7 +194,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      
+       Sale menu = new Sale();
+        desktopPane.add(menu);
+        menu.setVisible(true);
+        menu = null;      
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
