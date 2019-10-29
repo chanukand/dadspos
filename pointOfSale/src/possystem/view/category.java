@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import possystem.dto.CategoryDto;
 import possystem.model.categoryModel;
 
@@ -132,6 +133,11 @@ public class category extends JInternalFrame {
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/Dele_20px.png"))); // NOI18N
         btnDelete.setPreferredSize(new java.awt.Dimension(50, 30));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -244,16 +250,25 @@ public class category extends JInternalFrame {
     }//GEN-LAST:event_txtSearchFocusLost
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        addCatogory obj = new addCatogory();
+        obj.btnSave.setText("Update");
+        obj.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         addCatogory obj = new addCatogory();
         obj.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        TableModel model = tblCate.getModel();
+        int row = tblCate.getSelectedRow();
+        int id = Integer.valueOf(tblCate.getValueAt(row, row).toString());
+    }//GEN-LAST:event_btnDeleteActionPerformed
     private void newForm(){
-        System.out.println("tytytytjkjkuiiui");
+        System.out.println("");
     }
+        
     /**
      * @param args the command line arguments
      */
