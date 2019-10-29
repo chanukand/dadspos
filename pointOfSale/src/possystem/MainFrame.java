@@ -162,6 +162,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCheckBoxMenuItem2.setSelected(true);
         jCheckBoxMenuItem2.setText("Category Report");
+        jCheckBoxMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/category_20px.png"))); // NOI18N
         jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuItem2ActionPerformed(evt);
@@ -171,6 +172,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCheckBoxMenuItem3.setSelected(true);
         jCheckBoxMenuItem3.setText("Item Report");
+        jCheckBoxMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/item_20px.png"))); // NOI18N
         jCheckBoxMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuItem3ActionPerformed(evt);
@@ -180,6 +182,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCheckBoxMenuItem4.setSelected(true);
         jCheckBoxMenuItem4.setText("Purchase Report");
+        jCheckBoxMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/purchase_20px.png"))); // NOI18N
         jCheckBoxMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuItem4ActionPerformed(evt);
@@ -189,6 +192,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCheckBoxMenuItem5.setSelected(true);
         jCheckBoxMenuItem5.setText("Sales Report");
+        jCheckBoxMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/report_20px.png"))); // NOI18N
         jCheckBoxMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuItem5ActionPerformed(evt);
