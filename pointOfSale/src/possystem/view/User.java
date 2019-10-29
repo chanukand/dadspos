@@ -53,7 +53,7 @@ public class User extends JInternalFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 204), 2, true));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel1.setText("Name");
 
@@ -136,7 +136,7 @@ public class User extends JInternalFrame {
                 .addGap(5, 5, 5))
         );
 
-        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 204), 2, true));
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/Save_20px.png"))); // NOI18N
         btnSave.setText("Save");
@@ -164,7 +164,7 @@ public class User extends JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(117, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)

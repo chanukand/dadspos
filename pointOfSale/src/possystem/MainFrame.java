@@ -15,8 +15,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 import possystem.view.Branch;
 import possystem.view.Itemm;
 import possystem.view.Purchase;
+import possystem.view.Sale;
 import possystem.view.User;
 import possystem.view.category;
+import possystem.view.categoryReport;
 
 /**
  *
@@ -63,6 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,7 +128,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2.setText("Transaction");
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/paymentreve.png"))); // NOI18N
-        jMenuItem3.setText("Cashier");
+        jMenuItem3.setText("Sale");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -150,6 +153,15 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/Change User_20px.png"))); // NOI18N
         jMenuItem5.setText("User Details Report");
         jMenu3.add(jMenuItem5);
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("Category Report");
+        jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jCheckBoxMenuItem2);
 
         jMenuBar1.add(jMenu3);
 
@@ -193,7 +205,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      
+       Sale menu = new Sale();
+        desktopPane.add(menu);
+        menu.setVisible(true);
+        menu = null;      
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -210,6 +225,13 @@ public class MainFrame extends javax.swing.JFrame {
         usr.setVisible(true);
         usr = null;
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
+        categoryReport menu = new categoryReport();
+        desktopPane.add(menu);
+        menu.setVisible(true);
+        menu = null;
+    }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +271,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
