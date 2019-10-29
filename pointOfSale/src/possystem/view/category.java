@@ -5,6 +5,7 @@
  */
 package possystem.view;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +52,8 @@ public class category extends JInternalFrame {
                 Object[] rowData = {object.getId(), object.getCode(), object.getName(), object.getDesc(), object.getRemark()};
                 dtf.addRow(rowData);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(category.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(category.class.getName()).log(Level.SEVERE, null, ex);
         }
