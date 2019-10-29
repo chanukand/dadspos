@@ -263,9 +263,13 @@ public class category extends JInternalFrame {
     }//GEN-LAST:event_txtSearchFocusLost
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        addCatogory obj = new addCatogory();
-        obj.btnSave.setText("Update");
-        obj.setVisible(true);
+        if(tblCate.getSelectedRow() >= 0){
+            addCatogory obj = new addCatogory();
+            obj.btnSave.setText("Update");
+            obj.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select row");
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed

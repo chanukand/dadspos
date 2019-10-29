@@ -228,6 +228,7 @@ public class addCatogory extends javax.swing.JDialog {
                 }
             } else if("Update".equals(btnSave.getText())) {
                 category cat = new category();
+                System.out.println(cat.tblCate.getSelectedRow());
                 System.out.println(cat.tblCate.getValueAt(cat.tblCate.getSelectedRow(), 0));
             }
         } catch (Exception ex) {
