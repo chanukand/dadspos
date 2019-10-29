@@ -18,6 +18,7 @@ import possystem.view.Purchase;
 import possystem.view.Sale;
 import possystem.view.User;
 import possystem.view.category;
+import possystem.view.categoryReport;
 
 /**
  *
@@ -64,6 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +154,15 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem5.setText("User Details Report");
         jMenu3.add(jMenuItem5);
 
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("Category Report");
+        jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jCheckBoxMenuItem2);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -215,6 +226,13 @@ public class MainFrame extends javax.swing.JFrame {
         usr = null;
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
+    private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
+        categoryReport menu = new categoryReport();
+        desktopPane.add(menu);
+        menu.setVisible(true);
+        menu = null;
+    }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -253,6 +271,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
