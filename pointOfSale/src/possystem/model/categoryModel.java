@@ -35,7 +35,7 @@ public class categoryModel {
     
     public static boolean update(CategoryDto dto) throws Exception {
         Connection con = DBConnection.getInstance().getConnection();
-        String sql = "UPDTAE category SET code=?, name=?,description=?, remark=?, date=?, user=? WHERE id=?";
+        String sql = "UPDATE category SET code=?, name=?,description=?, remark=?, date=?, user=? WHERE id=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setObject(1, dto.getCode());
         p.setObject(2, dto.getName());
@@ -81,5 +81,17 @@ public class categoryModel {
             crt1.add(crt);
         }
         return crt1;
+    }
+    
+     public static int getCatId(String id) throws Exception {
+        Connection con = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM category WHERE NAME='"+id+"'";
+        PreparedStatement pst = con.prepareStatement(sql);
+        ResultSet rst = pst.executeQuery();
+        int catgoryId=0;
+        if (rst.next()) {            
+            catgoryId = rst.getInt("id");
+        }
+        return catgoryId;
     }
 }

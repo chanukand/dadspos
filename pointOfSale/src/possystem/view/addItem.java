@@ -7,13 +7,21 @@ package possystem.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import possystem.data.ButtonType;
+import possystem.data.CommonDTO;
+import possystem.data.Message;
+import possystem.data.MessageType;
 import possystem.dto.CategoryDto;
+import possystem.dto.ItemDto;
+import possystem.model.ItemModel;
 import possystem.model.categoryModel;
+import possystem.util.CommonFunc;
+import static possystem.view.addCatogory.txtDesc;
 
 /**
  *
@@ -24,9 +32,11 @@ public class addItem extends javax.swing.JDialog {
     /**
      * Creates new form csuDetails
      */
+    public static int ITEM_ID;
+
     public addItem() {
         initComponents();
-         Toolkit theKit = getToolkit();
+        Toolkit theKit = getToolkit();
         Dimension wndSize = theKit.getScreenSize();
         int widW = wndSize.width;
         int heiW = wndSize.height;
@@ -35,7 +45,7 @@ public class addItem extends javax.swing.JDialog {
         int setW = (widW - wid) / 2;
         int setH = (heiW - hei) / 2;
         setLocation(setW, setH);
-        
+
         loadCategory();
     }
 
@@ -63,11 +73,11 @@ public class addItem extends javax.swing.JDialog {
         txtCost = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Add Item");
+        setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,10 +125,20 @@ public class addItem extends javax.swing.JDialog {
                 txtCostActionPerformed(evt);
             }
         });
+        txtCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCostKeyPressed(evt);
+            }
+        });
 
         txtPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPriceActionPerformed(evt);
+            }
+        });
+        txtPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPriceKeyPressed(evt);
             }
         });
 
@@ -187,10 +207,10 @@ public class addItem extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -202,7 +222,7 @@ public class addItem extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -212,7 +232,7 @@ public class addItem extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnSave)
                     .addComponent(jButton2))
                 .addGap(5, 5, 5))
         );
@@ -255,12 +275,47 @@ public class addItem extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDesActionPerformed
 
     private void txtRemarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRemarkActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtRemarkActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        try {
+            if ("".equals(txtName.getText().trim())) {
+                JOptionPane.showMessageDialog(this, Message.ENTER_NAME, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if ("".equals(txtDesc.getText().trim())) {
+                JOptionPane.showMessageDialog(this, Message.ENTER_DESC, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ItemDto item = new ItemDto(
+                    "ITEM001",
+                    txtName.getText(),
+                    txtDes.getText(),
+                    txtRemark.getText(),
+                    CommonDTO.USER_ID,
+                    categoryModel.getCatId(cmbCategory.getSelectedItem().toString()),
+                    Double.valueOf(txtCost.getText()),
+                    Double.valueOf(txtPrice.getText()),
+                    ITEM_ID
+            );
+            if (ButtonType.SAVE_BTN.equals(btnSave.getText())) {
+                if (ItemModel.add(item)) {
+                    JOptionPane.showMessageDialog(this, Message.SAVE_SUCCES_MSG, MessageType.INFO_MSG, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, Message.SAVE_NOT_SUCCES_MSG, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (ButtonType.UPDATE_BTN.equals(btnSave.getText())) {
+                if (ItemModel.update(item)) {
+                    JOptionPane.showMessageDialog(this, Message.SAVE_SUCCES_MSG, MessageType.INFO_MSG, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, Message.SAVE_NOT_SUCCES_MSG, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(addItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void cmbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoryActionPerformed
         // TODO add your handling code here:
@@ -273,10 +328,34 @@ public class addItem extends javax.swing.JDialog {
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPriceActionPerformed
-    private void loadCategory(){
+
+    private void txtCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyPressed
+        int keyCode = CommonFunc.acceptOnlyNumbers(txtCost, evt);
+        if (keyCode == 46) {
+            JOptionPane.showMessageDialog(this, Message.NOT_VALID_TWO_DOTS, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+            txtCost.setText(txtCost.getText().replace(".", ""));
+        } else if (keyCode != 0) {
+            JOptionPane.showMessageDialog(this, Message.ENTER_NUMBERS, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+            char charr = evt.getKeyChar();
+            txtCost.setText(txtCost.getText().replace(String.valueOf(charr), ""));
+        }
+    }//GEN-LAST:event_txtCostKeyPressed
+
+    private void txtPriceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPriceKeyPressed
+        int keyCode = CommonFunc.acceptOnlyNumbers(txtPrice, evt);
+        if (keyCode == 46) {
+            JOptionPane.showMessageDialog(this, Message.NOT_VALID_TWO_DOTS, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+            txtPrice.setText(txtPrice.getText().replace(".", ""));
+        } else if (keyCode != 0) {
+            JOptionPane.showMessageDialog(this, Message.ENTER_NUMBERS, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+            char charr = evt.getKeyChar();
+            txtPrice.setText(txtPrice.getText().replace(String.valueOf(charr), ""));
+        }
+    }//GEN-LAST:event_txtPriceKeyPressed
+    private void loadCategory() {
         try {
-            ArrayList<CategoryDto> catArr =  categoryModel.getAll();
-            
+            ArrayList<CategoryDto> catArr = categoryModel.getAll();
+
             for (CategoryDto object : catArr) {
                 cmbCategory.addItem(object.getName());
             }
@@ -284,6 +363,7 @@ public class addItem extends javax.swing.JDialog {
             Logger.getLogger(addItem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -351,8 +431,8 @@ public class addItem extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbCategory;
-    public static javax.swing.JButton jButton1;
+    public static javax.swing.JButton btnSave;
+    public static javax.swing.JComboBox<String> cmbCategory;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -363,10 +443,10 @@ public class addItem extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtCost;
-    private javax.swing.JTextField txtDes;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtRemark;
+    public static javax.swing.JTextField txtCost;
+    public static javax.swing.JTextField txtDes;
+    public static javax.swing.JTextField txtName;
+    public static javax.swing.JTextField txtPrice;
+    public static javax.swing.JTextField txtRemark;
     // End of variables declaration//GEN-END:variables
 }

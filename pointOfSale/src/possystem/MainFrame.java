@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import possystem.view.Branch;
-import possystem.view.Itemm;
+import possystem.view.Item;
 import possystem.view.Purchase;
 import possystem.view.Sale;
 import possystem.view.User;
@@ -223,9 +223,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        Itemm menu = null;
+        Item menu = null;
         try {
-            menu = new Itemm();
+            menu = new Item();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

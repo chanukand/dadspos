@@ -13,8 +13,13 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import possystem.data.ButtonType;
+import possystem.data.CommonDTO;
+import possystem.data.Message;
+import possystem.data.MessageType;
 import possystem.dto.CategoryDto;
 import possystem.model.categoryModel;
+import possystem.util.CommonFunc;
 
 /**
  *
@@ -30,13 +35,14 @@ public class category extends JInternalFrame {
     public category() {
         initComponents();
         showGrid();
+        
     }
     public void showGrid() {
         try {
             String colu[] = new String[]{"ID", "Code", "Name", "Description", "remark"};
             DefaultTableModel model = new DefaultTableModel(colu, 1) {
                 public boolean isCellEditable(int x, int y) {
-                    if (y == 0 || y == 1 || y == 4 || y == 5 || y == 9 || y == 10 || y == 12) {
+                    if (y == 0 || y == 1 || y == 2 || y == 3 || y == 4) {
                         return false;
                     } else {
                         return true;
@@ -265,10 +271,14 @@ public class category extends JInternalFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         if(tblCate.getSelectedRow() >= 0){
             addCatogory obj = new addCatogory();
-            obj.btnSave.setText("Update");
+            addCatogory.btnSave.setText(ButtonType.UPDATE_BTN);
+            addCatogory.txtName.setText(tblCate.getValueAt(tblCate.getSelectedRow(), 2).toString());
+            addCatogory.txtRemark.setText(tblCate.getValueAt(tblCate.getSelectedRow(), 4).toString());
+            addCatogory.txtDesc.setText(tblCate.getValueAt(tblCate.getSelectedRow(), 3).toString());
+            CommonDTO.ID = Integer.valueOf(tblCate.getValueAt(tblCate.getSelectedRow(), 0).toString());
             obj.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Please select row");
+            JOptionPane.showMessageDialog(this, Message.SELECT_ROW, MessageType.INFO_MSG, JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -282,19 +292,16 @@ public class category extends JInternalFrame {
         int id = Integer.valueOf(tblCate.getValueAt(row, 0).toString());
         try{
             if(categoryModel.delete(id)){
-                JOptionPane.showMessageDialog(this, "Delete Successfully");
+                JOptionPane.showMessageDialog(this, Message.DELETE_SUCCESS_MSG);
                 showGrid();
             } else {
-                JOptionPane.showMessageDialog(this, "Delete not Successfully");
+                JOptionPane.showMessageDialog(this, Message.DELETE_NOT_SUCCESS_MSG);
             }
         } catch(Exception e){
             Logger.getLogger(category.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-    private void newForm(){
-        System.out.println("");
-    }
-        
+            
     /**
      * @param args the command line arguments
      */

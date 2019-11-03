@@ -10,84 +10,38 @@ package possystem.dto;
  * @author Lochana
  */
 public class ItemDto extends SuperDTO{
-    
-    
-        public ItemDto(String billNo,String actionTime,double qty,double amt,double discount,double money,int userId,int itemId,int id) {
-        this.billNo = billNo;
-        this.actionTime = actionTime;
-        this.qty = qty;
-        this.amt = amt;
-        this.discount = discount;
-        this.money = money;
-        this.userId = userId;
-        this.itemId = itemId;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public ItemDto(String code, String name, String description, String remark, int user, int cateId, double cost, double price, int id, String categoryName) {
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.remark = remark;
+        this.user = user;
+        this.cateId = cateId;
+        this.cost = cost;
+        this.price = price;
         this.id = id;
-        
-    }
-    
-
-    public String getBillNo() {
-        return billNo;
+        this.categoryName = categoryName;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
-    }
-
-    public String getActionTime() {
-        return actionTime;
-    }
-
-    public void setActionTime(String actionTime) {
-        this.actionTime = actionTime;
-    }
-
-    public double getQty() {
-        return qty;
-    }
-
-    public void setQty(double qty) {
-        this.qty = qty;
-    }
-
-    public double getAmt() {
-        return amt;
-    }
-
-    public void setAmt(double amt) {
-        this.amt = amt;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public double getMoney() {
-        return money;
-    }
-
-    public void setMoney(double money) {
-        this.money = money;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public ItemDto(String code, String name, String description, String remark, int user, int cateId, double cost, double price, int id) {
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.remark = remark;
+        this.user = user;
+        this.cateId = cateId;
+        this.cost = cost;
+        this.price = price;
+        this.id = id;
     }
 
     public int getId() {
@@ -97,17 +51,80 @@ public class ItemDto extends SuperDTO{
     public void setId(int id) {
         this.id = id;
     }
-    
-    private String billNo;
-    private String actionTime;
-    private double qty;
-    private double amt;
-    private double discount;
-    private double money;
-    private int userId;
-    private int itemId;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
+
+    public int getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(int cateId) {
+        this.cateId = cateId;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    private String code;
+    private String name;
+    private String description;
+    private String remark;
+    private int user;
+    private int cateId;
+    private double cost;
+    private double price;
     private int id;
-    
+    private String categoryName;
 }
 
     

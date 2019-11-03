@@ -5,8 +5,22 @@
  */
 package possystem.view;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import possystem.data.ButtonType;
+import possystem.data.CommonDTO;
+import possystem.data.Message;
+import possystem.data.MessageType;
+import possystem.dto.CategoryDto;
+import possystem.dto.ItemDto;
+import possystem.dto.PurchaseDto;
+import possystem.model.ItemModel;
+import possystem.model.PurchaseModel;
+import possystem.model.categoryModel;
+
 
 /**
  *
@@ -19,8 +33,27 @@ public class Purchase extends JInternalFrame {
      */
     public Purchase() {
         initComponents();
+        loadCombos();
     }
-
+    
+    private void loadCombos(){
+        try {
+            ArrayList<CategoryDto> catArr =  categoryModel.getAll();
+            
+            for (CategoryDto object : catArr) {
+                cmbCategory.addItem(object.getName());
+            }
+            
+            ArrayList<ItemDto> itemArr =  ItemModel.getAll();
+            
+            for (ItemDto object : itemArr) {
+                cmbItem.addItem(object.getName());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(addItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,20 +67,20 @@ public class Purchase extends JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         lblCategory = new javax.swing.JLabel();
         lblItem = new javax.swing.JLabel();
-        txtGroup = new javax.swing.JTextField();
+        txtGroupNo = new javax.swing.JTextField();
         lblGroup = new javax.swing.JLabel();
         lblQuan = new javax.swing.JLabel();
-        txtQuan = new javax.swing.JTextField();
-        txtWarr = new javax.swing.JTextField();
+        txtQty = new javax.swing.JTextField();
+        txtWrty = new javax.swing.JTextField();
         lblWarr = new javax.swing.JLabel();
         lblPri = new javax.swing.JLabel();
-        txtPri = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
         lblCost = new javax.swing.JLabel();
         txtCost = new javax.swing.JTextField();
         lblCost1 = new javax.swing.JLabel();
-        txtCost1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        txtRemark = new javax.swing.JTextField();
+        cmbCategory = new javax.swing.JComboBox<>();
+        cmbItem = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
@@ -68,9 +101,9 @@ public class Purchase extends JInternalFrame {
 
         lblItem.setText("Item");
 
-        txtGroup.addActionListener(new java.awt.event.ActionListener() {
+        txtGroupNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGroupActionPerformed(evt);
+                txtGroupNoActionPerformed(evt);
             }
         });
 
@@ -78,15 +111,15 @@ public class Purchase extends JInternalFrame {
 
         lblQuan.setText("Quntity");
 
-        txtQuan.addActionListener(new java.awt.event.ActionListener() {
+        txtQty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuanActionPerformed(evt);
+                txtQtyActionPerformed(evt);
             }
         });
 
-        txtWarr.addActionListener(new java.awt.event.ActionListener() {
+        txtWrty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtWarrActionPerformed(evt);
+                txtWrtyActionPerformed(evt);
             }
         });
 
@@ -94,9 +127,9 @@ public class Purchase extends JInternalFrame {
 
         lblPri.setText("Price");
 
-        txtPri.addActionListener(new java.awt.event.ActionListener() {
+        txtPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPriActionPerformed(evt);
+                txtPriceActionPerformed(evt);
             }
         });
 
@@ -110,15 +143,11 @@ public class Purchase extends JInternalFrame {
 
         lblCost1.setText("Remark");
 
-        txtCost1.addActionListener(new java.awt.event.ActionListener() {
+        txtRemark.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCost1ActionPerformed(evt);
+                txtRemarkActionPerformed(evt);
             }
         });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -140,16 +169,16 @@ public class Purchase extends JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1, 0, 150, Short.MAX_VALUE)
+                                .addComponent(cmbCategory, 0, 150, Short.MAX_VALUE)
                                 .addComponent(txtCost)
-                                .addComponent(txtWarr)
-                                .addComponent(txtQuan)
-                                .addComponent(txtPri)
-                                .addComponent(txtGroup, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtWrty)
+                                .addComponent(txtQty)
+                                .addComponent(txtPrice)
+                                .addComponent(txtGroupNo, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(cmbItem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(101, 101, 101))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtCost1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRemark, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -157,27 +186,27 @@ public class Purchase extends JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCategory))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblItem)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGroupNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblGroup))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQuan))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtWarr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtWrty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblWarr))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPri))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -185,7 +214,7 @@ public class Purchase extends JInternalFrame {
                     .addComponent(lblCost))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRemark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCost1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -264,15 +293,45 @@ public class Purchase extends JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGroupActionPerformed
+    private void txtGroupNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGroupNoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtGroupActionPerformed
+    }//GEN-LAST:event_txtGroupNoActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-
-        } catch (Exception e) {
-//            Logger.getLogger(CsuCollection.class.getName()).log(Level.SEVERE, null, e);
+            
+            if ("".equals(this.txtCost.getText().trim())) {
+                JOptionPane.showMessageDialog(this, Message.ENTER_NAME, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if ("".equals(this.txtPrice.getText().trim())) {
+                JOptionPane.showMessageDialog(this, Message.ENTER_PRICE, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if ("".equals(this.txtQty.getText().trim())) {
+                JOptionPane.showMessageDialog(this, Message.ENTER_QTY, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+            
+            PurchaseDto purchase = new PurchaseDto(
+                    ItemModel.getItemId(cmbItem.getSelectedItem().toString()),
+                    CommonDTO.USER_ID,
+                    Double.valueOf(txtQty.getText()),
+                    Double.valueOf(txtPrice.getText()),
+                    Double.valueOf(txtCost.getText()),
+                    txtRemark.getText(),
+                    Double.valueOf(txtWrty.getText()),
+                    txtGroupNo.getText(),
+                    1
+            );
+            if(ButtonType.SAVE_BTN.equals(btnSave.getText())){
+                if(PurchaseModel.add(purchase)) {
+                    JOptionPane.showMessageDialog(this, Message.SAVE_SUCCES_MSG, MessageType.INFO_MSG, JOptionPane.INFORMATION_MESSAGE);
+                    btnSave.setEnabled(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, Message.SAVE_NOT_SUCCES_MSG, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -280,27 +339,35 @@ public class Purchase extends JInternalFrame {
         newForm();
     }//GEN-LAST:event_btnClearActionPerformed
 
-    private void txtQuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuanActionPerformed
+    private void txtQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuanActionPerformed
+    }//GEN-LAST:event_txtQtyActionPerformed
 
-    private void txtWarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWarrActionPerformed
+    private void txtWrtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWrtyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtWarrActionPerformed
+    }//GEN-LAST:event_txtWrtyActionPerformed
 
-    private void txtPriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriActionPerformed
+    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriActionPerformed
+    }//GEN-LAST:event_txtPriceActionPerformed
 
     private void txtCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCostActionPerformed
 
-    private void txtCost1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCost1ActionPerformed
+    private void txtRemarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRemarkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCost1ActionPerformed
+    }//GEN-LAST:event_txtRemarkActionPerformed
     private void newForm(){
-        
+        btnSave.setEnabled(true);
+        txtCost.setText("");
+        txtGroupNo.setText("");
+        txtPrice.setText("");
+        txtQty.setText("");
+        txtRemark.setText("");
+        txtWrty.setText("");
+        cmbCategory.setSelectedIndex(0);
+        cmbItem.setSelectedIndex(0);
     }
     /**
      * @param args the command line arguments
@@ -355,8 +422,8 @@ public class Purchase extends JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cmbCategory;
+    private javax.swing.JComboBox<String> cmbItem;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -369,10 +436,10 @@ public class Purchase extends JInternalFrame {
     private javax.swing.JLabel lblQuan;
     private javax.swing.JLabel lblWarr;
     private javax.swing.JTextField txtCost;
-    private javax.swing.JTextField txtCost1;
-    private javax.swing.JTextField txtGroup;
-    private javax.swing.JTextField txtPri;
-    private javax.swing.JTextField txtQuan;
-    private javax.swing.JTextField txtWarr;
+    private javax.swing.JTextField txtGroupNo;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtQty;
+    private javax.swing.JTextField txtRemark;
+    private javax.swing.JTextField txtWrty;
     // End of variables declaration//GEN-END:variables
 }

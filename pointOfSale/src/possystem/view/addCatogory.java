@@ -9,10 +9,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import possystem.data.CommonDTO;
+import possystem.data.Message;
+import possystem.data.MessageType;
 import possystem.dto.CategoryDto;
 import possystem.model.categoryModel;
 
@@ -24,8 +26,7 @@ public class addCatogory extends javax.swing.JDialog {
 
     /**
      * Creates new form csuDetails
-     */   
-    
+     */       
     public addCatogory() {
         initComponents();
         
@@ -206,6 +207,14 @@ public class addCatogory extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
         try {
+            if("".equals(txtName.getText().trim())){
+                JOptionPane.showMessageDialog(this, Message.ENTER_NAME, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if("".equals(txtDesc.getText().trim())){
+                JOptionPane.showMessageDialog(this, Message.ENTER_DESC, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
             
@@ -215,21 +224,25 @@ public class addCatogory extends javax.swing.JDialog {
                     "CAT01",
                     dtf.format(now),
                     txtRemark.getText(),
-                    1,
-                    1
+                    CommonDTO.USER_ID,
+                    CommonDTO.ID
             );
             if("Save".equals(btnSave.getText())){
                 if(categoryModel.add(crt)){
-                    JOptionPane.showMessageDialog(this, "Saved Successfully");
+                    JOptionPane.showMessageDialog(this, Message.SAVE_SUCCES_MSG, MessageType.INFO_MSG, JOptionPane.INFORMATION_MESSAGE);
                     category cat = new category();
                     cat.showGrid();
                 } else{
-                    JOptionPane.showMessageDialog(this, "Saved not Successfully");
+                    JOptionPane.showMessageDialog(this, Message.SAVE_NOT_SUCCES_MSG, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
                 }
             } else if("Update".equals(btnSave.getText())) {
-                category cat = new category();
-                System.out.println(cat.tblCate.getSelectedRow());
-                System.out.println(cat.tblCate.getValueAt(cat.tblCate.getSelectedRow(), 0));
+                if(categoryModel.update(crt)){
+                    JOptionPane.showMessageDialog(this, Message.UPDATE_SUCCESS_MSG, MessageType.INFO_MSG, JOptionPane.INFORMATION_MESSAGE);
+                    category cat = new category();
+                    cat.showGrid();
+                }  else {
+                    JOptionPane.showMessageDialog(this, Message.SAVE_NOT_SUCCES_MSG, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+                }              
             }
         } catch (Exception ex) {
             Logger.getLogger(addCatogory.class.getName()).log(Level.SEVERE, null, ex);
@@ -297,9 +310,9 @@ public class addCatogory extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtDesc;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtRemark;
+    public static javax.swing.JTextField txtDesc;
+    public static javax.swing.JTextField txtName;
+    public static javax.swing.JTextField txtRemark;
     // End of variables declaration//GEN-END:variables
 
     

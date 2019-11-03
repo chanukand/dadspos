@@ -6,7 +6,6 @@
 package possystem.view;
 
 import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 
 /**
  *

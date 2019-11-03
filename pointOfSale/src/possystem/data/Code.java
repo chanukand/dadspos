@@ -10,5 +10,7 @@ package possystem.data;
  * @author Home
  */
 public class Code {
-    public static String category = "CAT";
+    public static String CATEGORY = "CAT";
+    public static String STATUS_00 = "00";
+    public static String STATUS_0 = "0";
 }

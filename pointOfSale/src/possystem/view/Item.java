@@ -5,22 +5,65 @@
  */
 package possystem.view;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import possystem.data.Message;
+import possystem.data.MessageType;
+import possystem.dto.CategoryDto;
+import possystem.dto.ItemDto;
+import possystem.model.ItemModel;
+import possystem.model.categoryModel;
 
 /**
  *
  * @author Home
  */
-public class Itemm extends JInternalFrame {
-
+public class Item extends JInternalFrame {
+    
+    DefaultTableModel dtf;
     /**
      * Creates new form csuDetails
      */
-    public Itemm() {
+    public Item() {
         initComponents();
+        showGrid();
     }
-
+    public void showGrid() {
+        try {
+            String colu[] = new String[]{"ID", "Category", "Code", "Name", "Description", "Cost", "Price", "Remark"};
+            DefaultTableModel model = new DefaultTableModel(colu, 1) {
+                public boolean isCellEditable(int x, int y) {
+                    if (y == 0 || y == 1 || y == 2 || y == 3 || y == 4) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            };
+            tblGrid.setModel(model);
+            
+            dtf = (DefaultTableModel) tblGrid.getModel();
+            dtf.setRowCount(0);
+            ArrayList<ItemDto> itemArr =  ItemModel.getAll();
+            
+            for (ItemDto object : itemArr) {
+                Object[] rowData = {object.getId(), object.getCategoryName(),
+                    object.getCode(), object.getName(), object.getDescription(), 
+                    String.format("%1$,.2f", object.getCost()), String.format("%1$,.2f", object.getPrice()), object.getRemark()};
+                dtf.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(category.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(category.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +82,7 @@ public class Itemm extends JInternalFrame {
         btnDelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblItem = new javax.swing.JTable();
+        tblGrid = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -95,6 +138,11 @@ public class Itemm extends JInternalFrame {
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/possystem/Images/Dele_20px.png"))); // NOI18N
         btnDelete.setPreferredSize(new java.awt.Dimension(50, 30));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -131,7 +179,7 @@ public class Itemm extends JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tblItem.setModel(new javax.swing.table.DefaultTableModel(
+        tblGrid.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -142,7 +190,7 @@ public class Itemm extends JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tblItem);
+        jScrollPane2.setViewportView(tblGrid);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -191,14 +239,22 @@ public class Itemm extends JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
-        if (txtSearch.getText().length() >= 2) {
-            evt.consume();
-
-        }
+       
     }//GEN-LAST:event_txtSearchKeyTyped
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-
+        try {
+            dtf = (DefaultTableModel) tblGrid.getModel();
+            dtf.setRowCount(0);
+            ArrayList<ItemDto> itemArr =  ItemModel.search(txtSearch.getText());
+            
+            for (ItemDto object : itemArr) {
+                Object[] rowData = {object.getId(), object.getCategoryName(), object.getCode(), object.getName(), object.getDescription(), object.getRemark()};
+                dtf.addRow(rowData);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
@@ -210,16 +266,30 @@ public class Itemm extends JInternalFrame {
     }//GEN-LAST:event_txtSearchFocusLost
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        if(tblGrid.getSelectedRow()>=0) {
+            addItem item = new addItem();
+            addItem.txtName.setText(tblGrid.getValueAt(tblGrid.getSelectedRow(), 3).toString());
+            addItem.txtCost.setText(tblGrid.getValueAt(tblGrid.getSelectedRow(), 5).toString());
+            addItem.txtDes.setText(tblGrid.getValueAt(tblGrid.getSelectedRow(), 4).toString());
+            addItem.txtPrice.setText(tblGrid.getValueAt(tblGrid.getSelectedRow(), 6).toString());
+            addItem.txtRemark.setText(tblGrid.getValueAt(tblGrid.getSelectedRow(), 7).toString());
+            addItem.cmbCategory.setSelectedItem(tblGrid.getValueAt(tblGrid.getSelectedRow(), 1).toString());
+            addItem.ITEM_ID = Integer.valueOf(tblGrid.getValueAt(tblGrid.getSelectedRow(), 0).toString());
+            item.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, Message.SELECT_ROW, MessageType.ERROR_MSG, JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-addItem obj = new addItem();
+        addItem obj = new addItem();
         obj.setVisible(true);        
     }//GEN-LAST:event_btnAddActionPerformed
-    private void newForm(){
-        
-    }
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+           
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -271,7 +341,7 @@ addItem obj = new addItem();
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSearch;
-    private javax.swing.JTable tblItem;
+    private javax.swing.JTable tblGrid;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,6 @@
  */
 package possystem.dto;
 
-import java.util.Date;
 
 /**
  * @author Home

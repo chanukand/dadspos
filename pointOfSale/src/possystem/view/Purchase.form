@@ -98,19 +98,19 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jComboBox1" pref="150" max="32767" attributes="0"/>
+                                  <Component id="cmbCategory" pref="150" max="32767" attributes="0"/>
                                   <Component id="txtCost" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtWarr" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtQuan" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtPri" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtGroup" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtWrty" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtQty" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtPrice" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtGroupNo" alignment="1" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jComboBox2" max="32767" attributes="0"/>
+                              <Component id="cmbItem" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="txtCost1" min="-2" pref="219" max="-2" attributes="0"/>
+                          <Component id="txtRemark" min="-2" pref="219" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -122,32 +122,32 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbCategory" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCategory" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblItem" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbItem" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtGroup" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtGroupNo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblGroup" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtQuan" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtQty" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblQuan" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtWarr" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtWrty" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblWarr" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtPri" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPri" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
@@ -157,7 +157,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCost1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtRemark" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCost1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -176,9 +176,9 @@
             <Property name="text" type="java.lang.String" value="Item"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtGroup">
+        <Component class="javax.swing.JTextField" name="txtGroupNo">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtGroupActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtGroupNoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblGroup">
@@ -191,14 +191,14 @@
             <Property name="text" type="java.lang.String" value="Quntity"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtQuan">
+        <Component class="javax.swing.JTextField" name="txtQty">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuanActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQtyActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtWarr">
+        <Component class="javax.swing.JTextField" name="txtWrty">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtWarrActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtWrtyActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblWarr">
@@ -211,9 +211,9 @@
             <Property name="text" type="java.lang.String" value="Price"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPri">
+        <Component class="javax.swing.JTextField" name="txtPrice">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPriActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPriceActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCost">
@@ -231,35 +231,25 @@
             <Property name="text" type="java.lang.String" value="Remark"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCost1">
+        <Component class="javax.swing.JTextField" name="txtRemark">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCost1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRemarkActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cmbCategory">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="cmbItem">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
