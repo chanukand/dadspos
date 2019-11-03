@@ -14,10 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import possystem.data.Message;
 import possystem.data.MessageType;
-import possystem.dto.CategoryDto;
 import possystem.dto.ItemDto;
 import possystem.model.ItemModel;
-import possystem.model.categoryModel;
 
 /**
  *
